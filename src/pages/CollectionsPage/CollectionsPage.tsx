@@ -1,7 +1,9 @@
 import { getCollections } from "../../api/collections/getCollections";
+import { CollectionCard } from "../../components/CollectionCard/CollectionCard";
 import { useFetch } from "../../hooks/useFetch";
+import styles from "./CollectionsPage.module.css";
 
-export const CollectionsPage = () => {
+export function CollectionsPage() {
   const {
     data: collectionsResponse,
     loading,
@@ -13,10 +15,10 @@ export const CollectionsPage = () => {
   if (!collectionsResponse) return null;
 
   return (
-    <ul>
-      {collectionsResponse.data.map(({ id, title }) => (
-        <li key={id}>{title}</li>
+    <ul className={styles.list}>
+      {collectionsResponse.data.map((collection) => (
+        <CollectionCard key={collection.id} collection={collection} />
       ))}
     </ul>
   );
-};
+}
