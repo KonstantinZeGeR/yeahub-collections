@@ -1,5 +1,6 @@
 import type { Collection } from "../../types/collection";
 import styles from "./CollectionCard.module.css";
+import { Link } from "react-router-dom";
 
 type CollectionCardProps = {
   collection: Collection;
@@ -29,9 +30,11 @@ export function CollectionCard({ collection }: CollectionCardProps) {
             </li>
           ))}
         </ul>
-
-        <h3 className={styles.title}>{title}</h3>
-
+        <h3 className={styles.title}>
+          <Link to={`/collections/${collection.id}`} className={styles.link}>
+            {title}
+          </Link>
+        </h3>
         <div className={styles.meta}>
           <span className={styles.access}>
             {isFree ? "Для всех" : "Для участников"}
