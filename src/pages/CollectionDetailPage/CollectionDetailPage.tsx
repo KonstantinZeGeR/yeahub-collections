@@ -4,6 +4,10 @@ import { useFetch } from "../../hooks/useFetch";
 import styles from "./CollectionDetailPage.module.css";
 import { useState } from "react";
 import { getQuestions } from "../../api/questions/getQuestions";
+import { QuestionItem } from "../../components/QuestionItem/QuestionItem";
+import { Pagination } from "../../components/Pagination/Pagination";
+
+const QUESTIONS_LIMIT = 10;
 
 export function CollectionDetailPage() {
   const { collectionId } = useParams();
@@ -11,7 +15,12 @@ export function CollectionDetailPage() {
   const id = Number(collectionId);
 
   const { data: questionsResponse } = useFetch(
-    () => getQuestions({ collection: id, page: questionsPage, limit: 10 }),
+    () =>
+      getQuestions({
+        collection: id,
+        page: questionsPage,
+        limit: QUESTIONS_LIMIT,
+      }),
     [id, questionsPage],
   );
 
@@ -26,6 +35,10 @@ export function CollectionDetailPage() {
   if (error) return <p>Error: {error.message}</p>;
   if (!collection) return null;
 
+  const totalPages = Math.ceil(
+    (questionsResponse?.total ?? 0) / QUESTIONS_LIMIT,
+  );
+
   return (
     <div className={styles.page}>
       <div className={styles.main}>
@@ -39,6 +52,19 @@ export function CollectionDetailPage() {
             <h1 className={styles.title}>{collection.title}</h1>
             <p className={styles.description}>{collection.description}</p>
           </div>
+        </div>
+        <div className={styles.questions}>
+          <h2>Вопросы</h2>
+          <ul>
+            {questionsResponse?.data.map((question) => (
+              <QuestionItem key={question.id} question={question} />
+            ))}
+          </ul>
+          <Pagination
+            currentPage={questionsPage}
+            totalPages={totalPages}
+            onPageChange={setQuestionsPage}
+          />
         </div>
       </div>
       <aside className={styles.sidebar}>
