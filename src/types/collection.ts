@@ -33,7 +33,7 @@ export type Collection = {
   isFree: boolean;
   keywords: string[];
   createdBy: Author | null;
-  company: Company;
+  company: Company | null;
   specializations: Specialization[];
   questionsCount: number;
   tasksCount: number;

@@ -2,10 +2,18 @@ import { useParams } from "react-router-dom";
 import { getCollectionById } from "../../api/collections/getCollectionById";
 import { useFetch } from "../../hooks/useFetch";
 import styles from "./CollectionDetailPage.module.css";
+import { useState } from "react";
+import { getQuestions } from "../../api/questions/getQuestions";
 
 export function CollectionDetailPage() {
   const { collectionId } = useParams();
+  const [questionsPage, setQuestionsPage] = useState(1);
   const id = Number(collectionId);
+
+  const { data: questionsResponse } = useFetch(
+    () => getQuestions({ collection: id, page: questionsPage, limit: 10 }),
+    [id, questionsPage],
+  );
 
   const {
     data: collection,
@@ -53,7 +61,9 @@ export function CollectionDetailPage() {
         </div>
         <div className={styles.block}>
           <h2 className={styles.label}>Компания</h2>
-          <span className={styles.chip}>{collection.company.title}</span>
+          <span className={styles.chip}>
+            {collection.company?.title ?? "-"}
+          </span>
         </div>
 
         <div className={styles.block}>
