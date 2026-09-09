@@ -1,3 +1,9 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
 .page {
   display: grid;
   grid-template-columns: minmax(0, 809px) 392px;
@@ -85,4 +91,24 @@
 .keyword {
   color: var(--color-primary);
   font-size: var(--fs-body-sm);
+}
+
+.questions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+}
+
+.questionsTitle {
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-semibold);
+}
+
+.questionsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
 }

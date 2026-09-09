@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { Question } from "../../types/question";
+import styles from "./QuestionItem.module.css";
 
 type QuestionItemProps = {
   question: Question;
@@ -9,21 +10,33 @@ export function QuestionItem({ question }: QuestionItemProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <li>
-      {question.title}
-      <button onClick={() => setIsOpen(!isOpen)}>{isOpen ? "▲" : "▼"}</button>
+    <li className={styles.item}>
+      <button className={styles.header} onClick={() => setIsOpen(!isOpen)}>
+        <span className={styles.title}>{question.title}</span>
+        <span className={styles.chevron}>{isOpen ? "▲" : "▼"}</span>
+      </button>
+
       {isOpen && (
-        <div>
-          <span>Рейтинг: {question.rate}</span>
-          <span>Сложность: {question.complexity}</span>
+        <div className={styles.body}>
+          <div className={styles.meta}>
+            <span className={styles.badge}>
+              Рейтинг: <b className={styles.value}>{question.rate}</b>
+            </span>
+            <span className={styles.badge}>
+              Сложность: <b className={styles.value}>{question.complexity}</b>
+            </span>
+          </div>
 
           {question.code && (
-            <pre>
+            <pre className={styles.code}>
               <code>{question.code}</code>
             </pre>
           )}
 
-          <div dangerouslySetInnerHTML={{ __html: question.shortAnswer }} />
+          <div
+            className={styles.answer}
+            dangerouslySetInnerHTML={{ __html: question.shortAnswer }}
+          />
         </div>
       )}
     </li>

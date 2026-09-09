@@ -54,8 +54,10 @@ export function CollectionDetailPage() {
           </div>
         </div>
         <div className={styles.questions}>
-          <h2>Вопросы</h2>
-          <ul>
+          <h2 className={styles.questionsTitle}>
+            Вопросы {collection.keywords.join(", ")}
+          </h2>
+          <ul className={styles.questionsList}>
             {questionsResponse?.data.map((question) => (
               <QuestionItem key={question.id} question={question} />
             ))}
