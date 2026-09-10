@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { Question } from "../../types/question";
 import styles from "./QuestionItem.module.css";
+import { Link } from "react-router-dom";
 
 type QuestionItemProps = {
   question: Question;
@@ -37,6 +38,7 @@ export function QuestionItem({ question }: QuestionItemProps) {
             className={styles.answer}
             dangerouslySetInnerHTML={{ __html: question.shortAnswer }}
           />
+          <Link to={`/questions/${question.id}`} className={styles.more}>Подробнее →</Link>
         </div>
       )}
     </li>
