@@ -1,0 +1,88 @@
+.item {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: var(--font-family);
+  text-align: left;
+}
+
+/* Фиолетовая точка-маркер перед заголовком */
+.title::before {
+  content: "•";
+  margin-right: var(--space-sm);
+  color: var(--color-primary);
+}
+
+.title {
+  font-size: var(--fs-body-lg);
+  font-weight: var(--fw-medium);
+  color: var(--color-text);
+}
+
+.chevron {
+  flex-shrink: 0;
+  color: var(--color-text-secondary);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  background-color: var(--black-25);
+  font-size: var(--fs-body-sm);
+}
+
+/* Число в фиолетовом квадрате */
+.value {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-primary);
+  color: var(--color-text-on-primary);
+  font-weight: var(--fw-semibold);
+}
+
+.code {
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  background-color: var(--black-900);
+  color: var(--white);
+  font-size: var(--fs-body-sm);
+  overflow-x: auto;
+}
+
+.answer {
+  font-size: var(--fs-body-md);
+  line-height: var(--lh-loose);
+  color: var(--color-text);
+}
