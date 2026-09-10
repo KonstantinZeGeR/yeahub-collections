@@ -57,11 +57,19 @@ export function CollectionDetailPage() {
           <h2 className={styles.questionsTitle}>
             Вопросы {collection.keywords.join(", ")}
           </h2>
-          <ul className={styles.questionsList}>
-            {questionsResponse?.data.map((question) => (
-              <QuestionItem key={question.id} question={question} />
-            ))}
-          </ul>
+          {questionsResponse?.data.length === 0 ? (
+            <p className={styles.empty}>
+              {collection.isFree
+                ? "В этой коллекции пока нет вопросов"
+                : "Вопросы этой коллекции доступны только участникам"}
+            </p>
+          ) : (
+            <ul className={styles.questionsList}>
+              {questionsResponse?.data.map((question) => (
+                <QuestionItem key={question.id} question={question} />
+              ))}
+            </ul>
+          )}
           <Pagination
             currentPage={questionsPage}
             totalPages={totalPages}
